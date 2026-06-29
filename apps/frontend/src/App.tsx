@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import { createClient } from '@supabase/supabase-js'
+const supabase = createClient({
+  
+})
 import './App.css'
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
   return (
     <>
       <button onClick={()=>{
-        
+
       }}>
         Singin with solana
       </button>
