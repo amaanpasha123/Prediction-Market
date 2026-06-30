@@ -1,5 +1,5 @@
-import type { Request, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 
-export function middleware(req : Request, res : Response){
+export function middleware(req : Request, res : Response, next : NextFunction){
     
 }
