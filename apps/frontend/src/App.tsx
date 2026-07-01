@@ -57,7 +57,7 @@ function AppWrapper({supabase} : {supabase : SupabaseClient}) {
               );
             }}
           >
-            Click here to buy
+            Click here buy
           </button>
         </div>
       ) : (
