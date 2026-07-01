@@ -1,8 +1,18 @@
+import axios from "axios";
 import "./App.css";
-import { useSupabase } from "./hooks/useSupabase";
 import { useUser } from "./hooks/useUser";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { useState } from "react";
 
 function App() {
+  const [supabase, setSupabase] = useState(createClient(
+      "https://qwhpsesytnonmvljpqzf.supabase.co",
+      "sb_publishable_bfebdWejqNWIRrgkAfEvKQ_014qBpu3",
+    ));
+    return <AppWrapper supabase={supabase} />
+}
+
+function AppWrapper({supabase} : {supabase : SupabaseClient}) {
   const {
     claims,
     email,
@@ -18,7 +28,6 @@ function App() {
     verifyOtp,
     signOut,
   } = useUser();
-  const supabase = useSupabase();
 
   return (
     <div style={{ maxWidth: 400, margin: "40px auto", textAlign: "center" }}>
@@ -31,6 +40,25 @@ function App() {
             {JSON.stringify(claims, null, 2)}
           </pre>
           <button onClick={signOut}>Sign out</button>
+          <br />
+          <br />
+          <button
+            onClick={ async () => {
+              await supabase.auth.getSession().then(
+                (r) => {
+                  console.log(r.data.session?.access_token);
+                  axios.post("http://localhost:3000/buy", {
+                  },{
+                    headers:{
+                      Authorization: `Bearer ${r.data.session?.access_token}`
+                    }
+                  });
+                }
+              );
+            }}
+          >
+            Click here to buy
+          </button>
         </div>
       ) : (
         <>

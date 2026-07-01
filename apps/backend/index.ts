@@ -1,12 +1,15 @@
 import  Express from "express";
 import cors from "cors";
+import { middleware } from "./middleware";
 const app = Express();
 
 app.use(Express.json());
 app.use(cors());
 
 app.post("/buy", middleware, (req, res)=>{
-     
+   res.json({
+    message : "hiiiiii"
+   })  
 });
 
 app.post("/sell",middleware, (req, res)=>{
@@ -32,4 +35,4 @@ app.get("/history", middleware, (req, res)=>{
 })
 
 
-app.listen(5000,()=> console.log("app is listening"));
+app.listen(3000,()=> console.log("app is listening"));
